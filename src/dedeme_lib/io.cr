@@ -94,13 +94,14 @@ module DedemeLib
     # ```text
     # directory?
     # file?
-    # uid
-    # gid
+    # symlink?
+    # owner
+    # group
     # size
-    # atime -> last access in seconds
-    # mtime -> last modification in seconds
-    def info(path : String) : File::Stat
-      File.stat path
+    # permisions
+    # modification_time
+    def info(path : String) : File::Info
+      File.info path
     end
 
     # Returns a new file path whose template is: /tmp/*prefix*xxxxxxxxxx,
