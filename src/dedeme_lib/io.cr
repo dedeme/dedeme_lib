@@ -84,6 +84,11 @@ module DedemeLib
       FileUtils.cp_r(source, target)
     end
 
+    # Creates a symbolic link at 'new_path' to an existing file 'old_path'.
+    def symlink(old_path : String, new_path : String)
+      File.symlink(old_path, new_path)
+    end
+
     # Moves *old_filename* to *new_filename*.
     def rename(old_name : String, new_name : String)
       File.rename(old_name, new_name)
