@@ -44,15 +44,10 @@ module DedemeLib
       Dir.mkdir_p path
     end
 
-    # Calls the block once for each entry except for `.` and `..` in
-    # *directory*, passing the file name of each entry as a parameter to the
-    # block.
-    #
-    # ```
-    # d.each_entry "src" { |x| puts "Got #{x}" }
-    # ```
-    def each_child(directory : String)
-      Dir.new(directory).each_child { |f| yield f }
+    # Returns an array containing all of the filenames except for .
+    # and .. in the given directory.
+    def children(path : String) : Array(String)
+      Dir.children(path)
     end
 
     # Removes the file or recursively the directory at the given path.
