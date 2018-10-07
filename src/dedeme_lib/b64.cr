@@ -13,7 +13,7 @@ module DedemeLib
       Base64.strict_encode(s)
     end
 
-    def encodeBytes(bs : Bytes) : String
+    def encode_bytes(bs : Bytes) : String
       Base64.strict_encode(String.new(bs))
     end
 
@@ -21,7 +21,7 @@ module DedemeLib
       Base64.decode_string(s)
     end
 
-    def decodeBytes(s : String) : Bytes
+    def decode_bytes(s : String) : Bytes
       Base64.decode(s)
     end
 
@@ -30,7 +30,7 @@ module DedemeLib
       arr = Bytes.new(lg)
       rnd = Random.new
       (0...lg).each { |i| arr[i] = rnd.rand(256).to_u8 }
-      return encodeBytes(arr)[0...lg]
+      return encode_bytes(arr)[0...lg]
     end
 
     # Returns _k_ codified in irreversible way, using _lg_ B64 digits.
@@ -39,7 +39,7 @@ module DedemeLib
     # lg    : Length of result
     # return: _lg_ B64 digits
     def key(k : String, lg : Int) : String
-      dt = decodeBytes(encode(
+      dt = decode_bytes(encode(
         k + "codified in irreversibleDeme is good, very good!\n\r8@@"
       ))
 
@@ -75,7 +75,7 @@ module DedemeLib
         r[i] = sum + r1[i]
       end
 
-      return encodeBytes(r)[0...lg]
+      return encode_bytes(r)[0...lg]
     end
 
     # Encodes _m_ with key _k_.
@@ -91,7 +91,7 @@ module DedemeLib
       kb = k.to_slice
       r = Bytes.new(lg)
       (0...lg).each { |i| r[i] = mb[i] + kb[i] }
-      return encodeBytes(r)
+      return encode_bytes(r)
     end
 
     # Decodes _c_ using key _k_. _c_ was codified with cryp().
@@ -100,7 +100,7 @@ module DedemeLib
     # c     : Text codified with cryp()
     # return: 'c' decoded.
     def decryp(k : String, c : String) : String
-      mb = decodeBytes(c)
+      mb = decode_bytes(c)
       lg = mb.size
       k = key(k, lg)
       kb = k.to_slice
