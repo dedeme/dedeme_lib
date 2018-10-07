@@ -51,7 +51,9 @@ module DedemeLib
 
     # Removes the file or recursively the directory at the given path.
     def del(path : String)
-      FileUtils.rm_r path
+      if exists? path
+        FileUtils.rm_r path
+      end
     end
 
     # Returns `true` if *path* is executable by the real user id of this
