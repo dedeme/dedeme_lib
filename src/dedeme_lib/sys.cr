@@ -41,7 +41,7 @@ module DedemeLib
 
     def self.exec(cmd : String, args : Array(String) | Nil = nil) : String
       io = IO::Memory.new
-      Process.run(cmd, args: args, output: io)
+      Process.run(cmd, args: args, output: io, error: io)
       io.to_s
     end
   end

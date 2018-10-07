@@ -1,4 +1,4 @@
-# Copyright 1-Feb-2018 ºDeme
+# Copyright 01-Oct-2018 ºDeme
 # GNU General Public License - V3 <http://www.gnu.org/licenses/>
 
 require "dir"
@@ -6,7 +6,6 @@ require "file_utils"
 require "file"
 
 module DedemeLib
-  extend self
 
   module Io
     extend self
