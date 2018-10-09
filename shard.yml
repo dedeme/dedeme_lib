@@ -1,9 +1,9 @@
 name: dedeme_lib
-version: 2018.2.4
+version: 2018.8.15
 
 authors:
   - ºDeme <>
 
-crystal: 0.24.1
+crystal: 0.26.1
 
 license: GPL-3
