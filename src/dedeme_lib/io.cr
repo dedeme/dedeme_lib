@@ -6,7 +6,6 @@ require "file_utils"
 require "file"
 
 module DedemeLib
-
   module Io
     extend self
 
@@ -43,9 +42,9 @@ module DedemeLib
       Dir.mkdir_p path
     end
 
-    # Returns an array containing all of the filenames except for .
-    # and .. in the given directory.
-    def children(path : String) : Array(String)
+    # Returns an array containing filenames in the given directory. Returns
+    # every filename except . and .. in the given directory.
+    def dir(path : String) : Array(String)
       Dir.children(path)
     end
 
@@ -110,7 +109,7 @@ module DedemeLib
     def tmp(prefix : String) : String
       r = ""
       while true
-        name = B64.genk(10).sub('/', '_')
+        name = Cryp.genk(10).sub('/', '_')
         r = "/tmp/#{prefix}#{name}"
         break if !exists? r
       end
@@ -166,6 +165,7 @@ module DedemeLib
     end
 
     SIZE = 8192
+
     def each_bytes(path)
       slice : Bytes = Bytes.new(SIZE)
       File.open(path, "r") do |file|

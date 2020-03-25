@@ -1,11 +1,9 @@
 # Copyright 1-Oct-2018 ºDeme
 # GNU General Public License - V3 <http://www.gnu.org/licenses/>
 
-require "io"
-
 def count_files(dir : String)
   n = 0
-  Io.children(dir).each { n += 1 }
+  Io.dir(dir).each { n += 1 }
   n
 end
 
@@ -13,7 +11,7 @@ describe Io do
   it "system" do
     Sys.init("basicTests")
     r = ""
-    Io.children(Io.parent Sys.home).each { |f| r += f }
+    Io.dir(Io.parent Sys.home).each { |f| r += f }
     r.includes?(Sys.app_name).should eq true
 
     Io.name("a/b/c.s").should eq("c.s")

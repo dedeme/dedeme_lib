@@ -13,7 +13,8 @@ module DedemeLib
       ENV.fetch("HOME")
     end
 
-    # Initializes the application. It creates the application directory
+    # Initializes the application. It creates the application directory.
+    # Successive calls with same _app_name_ have not effect.
     def self.init(app_name : String)
       @@app_name = app_name
       Io.mkdir "#{Sys.user_home}/.dmCrystal/#{app_name}"
@@ -39,11 +40,15 @@ module DedemeLib
       end
     end
 
-    def self.exec(cmd : String, args : Array(String) | Nil = nil) : String
-      io = IO::Memory.new
-      Process.run(cmd, args: args, output: io, error: io)
-      r = io.to_s
-      io.close
+    def self.exec(
+      cmd : String, args : Array(String) | Nil = nil
+    ) : {output: String, error: String}
+      ioOutput = IO::Memory.new
+      ioError = IO::Memory.new
+      Process.run(cmd, args: args, output: ioOutput, error: ioError)
+      r = {output: ioOutput.to_s, error: ioError.to_s}
+      ioOutput.close
+      ioError.close
       r
     end
   end

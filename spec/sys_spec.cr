@@ -6,6 +6,7 @@ require "system"
 describe Sys do
   it "system" do
     Sys.init("basicTests")
+    sleep 0.10
     Io.del(Sys.home) if Sys.home.starts_with? "/home/"
   end
 

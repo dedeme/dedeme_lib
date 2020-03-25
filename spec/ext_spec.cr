@@ -4,9 +4,8 @@
 require "ext"
 
 describe Ext do
-  Sys.init("basicTests")
-
   it "zip" do
+    Sys.init("basicTests")
     f = "#{Sys.home}/source.txt"
     fzip = "#{Sys.home}/target.zip"
 
@@ -21,5 +20,21 @@ describe Ext do
     tx.should eq "A test text"
     Io.del f
     Io.del fzip
+    Io.del Sys.home
   end
+
+  it "zenity" do
+    #m = Ext.zenity_entry("A Title", "Prompt:", "def")
+    #Ext.zenity_msg("info", "You wrote '#{m}'")
+  end
+
+  it "wget" do
+    Ext.wget("http://localhost").includes?("ºDeme").should eq true
+  end
+
+  it "puppeteer" do
+    Ext.puppeteer("http://localhost").includes?("ºDeme").should eq true
+  end
+
+
 end
