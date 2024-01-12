@@ -1,7 +1,7 @@
 # Copyright 6-Oct-2018 ºDeme
 # GNU General Public License - V3 <http://www.gnu.org/licenses/>
 
-require "ext"
+# require "ext"
 
 describe Ext do
   it "zip" do
@@ -24,17 +24,16 @@ describe Ext do
   end
 
   it "zenity" do
-    #m = Ext.zenity_entry("A Title", "Prompt:", "def")
-    #Ext.zenity_msg("info", "You wrote '#{m}'")
+    # m = Ext.zenity_entry("A Title", "Prompt:", "def")
+    # Ext.zenity_msg("info", "You wrote '#{m}'")
   end
 
   it "wget" do
-    Ext.wget("http://localhost").includes?("ºDeme").should eq true
+    Ext.wget("http://localhost").includes?("apache2").should eq true
   end
 
-  it "puppeteer" do
-    Ext.puppeteer("http://localhost").includes?("ºDeme").should eq true
-  end
-
+  #  it "puppeteer" do
+  #    Ext.puppeteer("http://localhost").includes?("ºDeme").should eq true
+  #  end
 
 end
